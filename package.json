@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "husky install",
+    "format": "prettier --write ./src/",
+    "lint:js": "eslint ./src/**/*.js",
+    "lint:css": "stylelint ./src/**/*.css",
+    "lint": "npm run lint:js && npm run lint:css && npm run format"
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,16 @@
   "bugs": {
     "url": "https://github.com/deniserokhin1/to-do-app-js/issues"
   },
-  "homepage": "https://github.com/deniserokhin1/to-do-app-js#readme"
+  "homepage": "https://github.com/deniserokhin1/to-do-app-js#readme",
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.11.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^28.0.0",
+    "stylelint-prettier": "^2.0.0"
+  }
 }
