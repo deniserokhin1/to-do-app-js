@@ -1,5 +1,175 @@
+/* stylelint-disable font-family-name-quotes */
+/* stylelint-disable alpha-value-notation */
+/* stylelint-disable color-function-notation */
+@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+:root {
+  --bg-body-color: #3c87ff;
+  --bg-wrapper-color: #fff;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-body-color);
+}
+
+.wrapper {
+  margin: 200px auto;
+  max-width: 405px;
+  background-color: var(--bg-wrapper-color);
+  border-radius: 7px;
+  padding: 28px 0;
+}
+
+.task-input {
+  position: relative;
+  height: 52px;
+  padding: 0 25px;
+}
+
+.task-input i {
+  position: absolute;
+  top: 50%;
+  transform: translate(17px, -50%);
+  color: #777575;
+}
+
+.task-input input {
+  height: 100%;
+  width: 100%;
+  padding: 0 20px 0 53px;
+  font-size: 18px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  outline: none;
+}
+
+.task-input input::placeholder {
+  color: #bfbfbf;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  border-bottom: 1px solid #ccc;
+}
+
+.controls .clear-btn {
+  padding: 7px 10px;
+  outline: none;
+  border: 0;
+  border-radius: 4px;
+  background: var(--bg-body-color);
+  color: var(--bg-wrapper-color);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.filters span {
+  margin: 0 8px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.filters span:first-child {
+  margin-left: 0;
+}
+
+.filters span.active {
+  color: var(--bg-body-color);
+}
+
+.filters span:active {
+  color: var(--bg-body-color);
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ccc;
+  font-size: 17px;
+}
+
+.task:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.task-box {
+  margin: 20px 25px;
+}
+
+.task label {
+  display: flex;
+}
+
+.task label input {
+  margin-right: 12px;
+}
+
+.settings {
+  position: relative;
+  cursor: pointer;
+}
+
+.task-menu {
+  position: absolute;
+  z-index: 2;
+  right: -5px;
+  bottom: 0;
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-in-out;
+  background: var(--bg-wrapper-color);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+.settings:hover .task-menu {
+  transform: scale(1);
+}
+
+.fa-ellipsis-h {
+  color: #3f3d3d;
+}
+
+.fa-pencil,
+.fa-times {
+  color: #3f3d3d;
+}
+
+.edit,
+.delete {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  padding-left: 8px;
+  color: black;
+}
+
+.task-menu li {
+  margin: 5px 0;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.task-menu li:hover {
+  background: rgb(242, 247, 250);
 }

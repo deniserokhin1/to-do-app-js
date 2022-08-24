@@ -24,13 +24,14 @@ module.exports = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'assets/resource',
+        loader: 'url-loader',
       },
       { type: 'javascript/auto' },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './src/index.html',
     }),
     new MiniCssExtractPlugin(),
   ],
