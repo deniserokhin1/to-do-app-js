@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style/normolize.css" />
+    <link rel="stylesheet" href="/src/style/style.css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+    <title>To Do App</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="task-input">
+            <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+            <input type="text" placeholder="Добавьте новую задачу" />
+        </div>
+        <div class="controls">
+            <div class="filters">
+                <span id="all" class="active">All</span>
+                <span id="pending">Pending</span>
+                <span id="completed">Completed</span>
+            </div>
+            <button class="clear-btn">Clear All</button>
+        </div>
+        <ul class="task-box">
+            <li class="task">
+                <label for="1">
+                    <input type="checkbox" id="1" />
+                    <p>New Task</p>
+                </label>
+                <div class="settings">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="task-menu">
+                        <li>
+                            <i class="fa fa-times" aria-hidden="true"><span class="delete">удалить</span></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-pencil" aria-hidden="true"><span class="edit">изменить</span></i>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="task">
+                <label for="2">
+                    <input type="checkbox" id="2" />
+                    <p>Second Task</p>
+                </label>
+                <div class="settings">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="task-menu">
+                        <li>
+                            <i class="fa fa-times" aria-hidden="true"><span class="delete">удалить</span></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-pencil" aria-hidden="true"><span class="edit">изменить</span></i>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="task">
+                <label for="3">
+                    <input type="checkbox" id="3" />
+                    <p>Third Task</p>
+                </label>
+                <div class="settings">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="task-menu">
+                        <li>
+                            <i class="fa fa-times" aria-hidden="true"><span class="delete">удалить</span></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-pencil" aria-hidden="true"><span class="edit">изменить</span></i>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="task">
+                <label for="3">
+                    <input type="checkbox" id="3" />
+                    <p>Покосить траву</p>
+                </label>
+                <div class="settings">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <ul class="task-menu">
+                        <li>
+                            <i class="fa fa-times" aria-hidden="true"><span class="delete">удалить</span></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-pencil" aria-hidden="true"><span class="edit">изменить</span></i>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
