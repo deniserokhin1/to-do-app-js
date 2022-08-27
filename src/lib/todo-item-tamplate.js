@@ -89,13 +89,13 @@ const todoItemTamplate = (todo, id) => ({
             },
           ],
         },
-        {
-          tag: 'i',
-          cls: ['task-box-menu__icon-arrow', 'fa', 'fa-arrows-v'],
-          attrs: {
-            'aria-hidden': true,
-          },
-        },
+        // {
+        //   tag: 'i',
+        //   cls: ['task-box-menu__icon-arrow', 'fa', 'fa-arrows-v'],
+        //   attrs: {
+        //     'aria-hidden': true,
+        //   },
+        // },
       ],
     },
   ],

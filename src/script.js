@@ -16,7 +16,7 @@ taskInput.focus();
 
 taskInput.addEventListener('keyup', (event) => {
   if (event.key === 'Enter' && taskInput.value) {
-    createToDo(idTargetTask);
+    createTask(idTargetTask);
   }
 });
 
@@ -41,7 +41,7 @@ listToDo.addEventListener('click', (event) => {
   }
 });
 
-function createToDo(id) {
+function createTask(id) {
   const userTask = taskInput.value.trim();
   if (!todos) {
     todos = [];
@@ -103,16 +103,11 @@ function changeControls(event) {
 
 function clearAll() {
   const taskItems = document.querySelectorAll('.task-box-item');
-  const arrIDForClear = [];
-  taskItems.forEach((taskItem) => {
-    if (taskItem.classList.contains('hide')) {
-      return;
-    }
-    arrIDForClear.push(taskItem.querySelector('.input').id);
-  });
-  arrIDForClear.reverse().forEach((id) => {
-    todos.splice(id, 1);
-  });
+  const arrTaskItems = Array.from(taskItems);
+  let arrIDForClear = arrTaskItems
+    .filter((item) => !item.classList.contains('hide'))
+    .map((item) => item.querySelector('.input').id);
+  arrIDForClear.reverse().map((id) => todos.splice(id, 1));
   localStorage.setItem('todo-list', JSON.stringify(todos));
   renderTodo(todos);
 }
@@ -142,4 +137,5 @@ function toggleListTasks() {
     default:
       break;
   }
+  taskInput.focus();
 }
