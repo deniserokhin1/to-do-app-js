@@ -1,4 +1,4 @@
 assets/
 node_modules/
 dist/
-font-awesome/
+src/style/font-awesome/

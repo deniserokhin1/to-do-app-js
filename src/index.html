@@ -1,54 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="./style/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./style/normolize.css" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <title>To Do App</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="./style/normolize.css" />
-  <link rel="stylesheet" href="./style/style.css" />
-  <title>To Do App</title>
-</head>
-
-<body>
-  <div class="wrapper">
-    <div class="container">
-      <div class="block-input">
-        <i class="block-input__icon fa fa-keyboard-o" aria-hidden="hidden"></i>
-        <input class="block-input__input" type="text" placeholder="Добавьте новую задачу" />
-      </div>
-      <div class="controls">
-        <ul class="controls__list">
-          <li class="controls-item">
-            <label for="all">
-              <div class="controls-item__text all">Все</div>
-              <input class="hide controls-item__radio-button" type="radio" name="control" id="all" />
-            </label>
-          </li>
-          <li class="controls-item">
-            <label for="tasks">
-              <div class="controls-item__text tasks active">Задачи</div>
-              <input class="hide controls-item__radio-button" type="radio" name="control" id="tasks" />
-            </label>
-          </li>
-          <li class="controls-item">
-            <label for="completed">
-              <div class="controls-item__text completed">Завершенные</div>
-              <input class="hide controls-item__radio-button" type="radio" name="control" id="completed" />
-            </label>
-          </li>
-        </ul>
-        <button class="controls__clear-btn">Очистить</button>
-      </div>
-      <div class="task-box">
-        <ul class="task-box__list"></ul>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="block-input">
+          <i
+            class="block-input__icon fa fa-keyboard-o"
+            aria-hidden="hidden"
+          ></i>
+          <input
+            class="block-input__input"
+            type="text"
+            placeholder="Добавьте новую задачу"
+          />
+        </div>
+        <div class="controls">
+          <ul class="controls__list">
+            <li class="controls-item">
+              <label for="all">
+                <div class="controls-item__text all">Все</div>
+                <input
+                  class="hide controls-item__radio-button"
+                  type="radio"
+                  name="control"
+                  id="all"
+                />
+              </label>
+            </li>
+            <li class="controls-item">
+              <label for="tasks">
+                <div class="controls-item__text tasks active">Задачи</div>
+                <input
+                  class="hide controls-item__radio-button"
+                  type="radio"
+                  name="control"
+                  id="tasks"
+                />
+              </label>
+            </li>
+            <li class="controls-item">
+              <label for="completed">
+                <div class="controls-item__text completed">Завершенные</div>
+                <input
+                  class="hide controls-item__radio-button"
+                  type="radio"
+                  name="control"
+                  id="completed"
+                />
+              </label>
+            </li>
+          </ul>
+          <button class="controls__clear-btn controls__clear-btn_click">
+            Очистить
+          </button>
+        </div>
+        <div class="task-box">
+          <ul class="task-box__list"></ul>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="./lib/todo-item-tamplate.js"></script>
-  <script src="./lib/templating-engine.js"></script>
-  <script src="./script.js"></script>
-</body>
-
+    <script src="./lib/todo-item-tamplate.js"></script>
+    <script src="./lib/templating-engine.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>

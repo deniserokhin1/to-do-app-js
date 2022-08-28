@@ -1,5 +1,5 @@
 assets/
 node_modules/
 dist/
-src/fonts
-src/style/fonts.css
+src/fonts/
+src/style/font-awesome/

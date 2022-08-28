@@ -33,7 +33,7 @@ body {
   max-width: 400px;
   background-color: var(--bg-wrapper-color);
   border-radius: 7px;
-  padding: 28px 0 10px;
+  padding: 28px 0 1px;
 }
 
 .block-input {
@@ -99,6 +99,16 @@ body {
   font-size: 15px;
 }
 
+.controls__clear-btn_click {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.controls__clear-btn_click:active {
+  transform: scale(0.7);
+  transform-origin: center;
+}
+
 .task-box-item {
   display: flex;
   justify-content: space-between;
@@ -111,8 +121,6 @@ body {
 
 .task-box-item:last-child {
   margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: 0;
 }
 
 .task-box {
@@ -153,10 +161,12 @@ body {
 
 .task-box-item__icon-goup {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 20px;
   cursor: pointer;
+}
+
+.icon-goup-item:not(:last-child) {
+  margin-right: 20px;
 }
 
 .task-box-settings__icon,

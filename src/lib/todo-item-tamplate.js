@@ -2,6 +2,9 @@
 const todoItemTamplate = (todo, id) => ({
   tag: 'li',
   cls: 'task-box-item',
+  attrs: {
+    draggable: 'true',
+  },
   content: [
     {
       tag: 'label',
@@ -32,7 +35,7 @@ const todoItemTamplate = (todo, id) => ({
       content: [
         {
           tag: 'div',
-          cls: 'task-box-settings',
+          cls: ['task-box-settings', 'icon-goup-item'],
           content: [
             {
               tag: 'i',
@@ -89,13 +92,18 @@ const todoItemTamplate = (todo, id) => ({
             },
           ],
         },
-        // {
-        //   tag: 'i',
-        //   cls: ['task-box-menu__icon-arrow', 'fa', 'fa-arrows-v'],
-        //   attrs: {
-        //     'aria-hidden': true,
-        //   },
-        // },
+        {
+          tag: 'i',
+          cls: [
+            'fa',
+            'fa-arrows-v',
+            'task-box-menu__icon-arrow',
+            'icon-goup-item',
+          ],
+          attrs: {
+            'aria-hidden': true,
+          },
+        },
       ],
     },
   ],
