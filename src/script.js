@@ -29,7 +29,7 @@ buttonClear.addEventListener('click', () => {
 });
 
 document.addEventListener('mouseup', (event) => {
-  target = event.target;
+  const target = event.target;
   if (target.classList.contains('task-box-settings__icon')) {
     return;
   }
@@ -88,7 +88,6 @@ function createTask(id) {
 }
 
 function updateStatusTask(target) {
-  console.log(target);
   const text = target.nextElementSibling;
   target.checked ? text.classList.add('true') : text.classList.remove('true');
   todos[target.id].status = target.checked;
@@ -187,23 +186,24 @@ function toggleListTasks() {
 
 function hideArrow() {
   const arrows = document.querySelectorAll('.task-box-menu__icon-arrow');
-  console.log(arrows);
   const arrowsNotHide = [];
   arrows.forEach((arrow) => {
     if (!arrow.closest('.task-box-item').classList.contains('hide')) {
       arrowsNotHide.push(arrow);
     }
   });
-  console.log(arrowsNotHide);
 
   for (let i = 0; i < arrowsNotHide.length; i++) {
     if (i === 0) {
-      console.log(arrowsNotHide[i]);
       arrowsNotHide[i].classList.add('hide');
-      arrowsNotHide[i].previousElementSibling.classList.add('icon-goup-item-not-margin');
+      arrowsNotHide[i].previousElementSibling.classList.add(
+        'icon-goup-item-not-margin'
+      );
     } else {
       arrowsNotHide[i].classList.remove('hide');
-      arrowsNotHide[i].previousElementSibling.classList.remove('icon-goup-item-not-margin');
+      arrowsNotHide[i].previousElementSibling.classList.remove(
+        'icon-goup-item-not-margin'
+      );
     }
   }
 }
