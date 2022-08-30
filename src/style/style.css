@@ -22,6 +22,8 @@ ul {
 body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--bg-body-color);
+  width: 100%;
+  height: 100vh;
 }
 
 .wrapper {
@@ -97,15 +99,11 @@ body {
   color: var(--bg-wrapper-color);
   cursor: pointer;
   font-size: 15px;
-}
-
-.controls__clear-btn_click {
-  transform: scale(1);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.03s ease-in-out;
 }
 
 .controls__clear-btn_click:active {
-  transform: scale(0.7);
+  transform: scale(0.95);
   transform-origin: center;
 }
 
@@ -143,35 +141,41 @@ body {
 }
 
 .task-box-menu {
+  display: flex;
+  justify-content: space-between;
   position: absolute;
   z-index: 2;
-  right: -5px;
-  bottom: 5px;
+  right: 17px;
+  bottom: -10px;
   transform: scale(0);
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-in-out;
+  transform-origin: right;
+  transition: transform 0.1s ease-in-out;
   background: var(--bg-wrapper-color);
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
 
-.task-box-settings:hover .task-box-menu {
-  transform: scale(1);
-}
-
 .task-box-item__icon-goup {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .icon-goup-item:not(:last-child) {
   margin-right: 20px;
 }
 
+.icon-goup-item-not-margin:not(:last-child) {
+  margin-right: 36px;
+}
+
 .task-box-settings__icon,
 .task-box-menu__icon-arrow {
   color: #3f3d3db9;
+  cursor: pointer;
+}
+
+.task-box-menu-click {
+  transform: scale(1);
 }
 
 .task-box-menu__icon {
@@ -207,4 +211,8 @@ body {
 
 .fa {
   text-rendering: optimizelegibility;
+}
+
+.input-radio {
+  display: none;
 }

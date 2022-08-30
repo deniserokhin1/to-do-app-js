@@ -2,9 +2,6 @@
 const todoItemTamplate = (todo, id) => ({
   tag: 'li',
   cls: 'task-box-item',
-  attrs: {
-    draggable: 'true',
-  },
   content: [
     {
       tag: 'label',
@@ -38,15 +35,33 @@ const todoItemTamplate = (todo, id) => ({
           cls: ['task-box-settings', 'icon-goup-item'],
           content: [
             {
-              tag: 'i',
-              cls: ['task-box-settings__icon', 'fa', 'fa-ellipsis-h'],
+              tag: 'label',
+              cls: 'task-box-settings__label',
               attrs: {
-                'aria-hidden': true,
+                for: Number(id + 1000),
               },
+              content: [
+                {
+                  tag: 'i',
+                  cls: ['task-box-settings__icon', 'fa', 'fa-ellipsis-h'],
+                  attrs: {
+                    'aria-hidden': true,
+                  },
+                },
+                {
+                  tag: 'input',
+                  cls: 'input-radio',
+                  attrs: {
+                    type: 'radio',
+                    id: Number(id + 1000),
+                    name: 'radio',
+                  },
+                },
+              ],
             },
             {
               tag: 'ul',
-              cls: 'task-box-menu',
+              cls: ['task-box-menu'],
               content: [
                 {
                   tag: 'li',
@@ -58,13 +73,6 @@ const todoItemTamplate = (todo, id) => ({
                       attrs: {
                         'aria-hidden': true,
                       },
-                      content: [
-                        {
-                          tag: 'span',
-                          cls: ['delete__icon', 'delete'],
-                          content: 'удалить',
-                        },
-                      ],
                     },
                   ],
                 },
@@ -78,13 +86,6 @@ const todoItemTamplate = (todo, id) => ({
                       attrs: {
                         'aria-hidden': true,
                       },
-                      content: [
-                        {
-                          tag: 'span',
-                          cls: ['delete__icon', 'edit'],
-                          content: 'изменить',
-                        },
-                      ],
                     },
                   ],
                 },
@@ -96,7 +97,7 @@ const todoItemTamplate = (todo, id) => ({
           tag: 'i',
           cls: [
             'fa',
-            'fa-arrows-v',
+            'fa-arrow-up',
             'task-box-menu__icon-arrow',
             'icon-goup-item',
           ],

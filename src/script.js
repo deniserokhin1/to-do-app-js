@@ -15,7 +15,7 @@ window.addEventListener('load', renderTodo(todos));
 taskInput.focus();
 
 taskInput.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter' && taskInput.value) {
+  if (event.key === 'Enter' && (taskInput.value || idTargetTask)) {
     createTask(idTargetTask);
   }
 });
@@ -26,6 +26,17 @@ controlsList.addEventListener('change', (event) => {
 
 buttonClear.addEventListener('click', () => {
   clearAll();
+});
+
+document.addEventListener('mouseup', (event) => {
+  target = event.target;
+  if (target.classList.contains('task-box-settings__icon')) {
+    return;
+  }
+  const menuEdit = document.querySelectorAll('.task-box-menu');
+  menuEdit.forEach((menu) => {
+    menu.classList.remove('task-box-menu-click');
+  });
 });
 
 listToDo.addEventListener('click', (event) => {
@@ -39,10 +50,29 @@ listToDo.addEventListener('click', (event) => {
   if (target.classList.contains('edit')) {
     editTask(target);
   }
+  if (target.classList.contains('input-radio')) {
+    hideAndShowMenu(event.target);
+  }
 });
+
+function hideAndShowMenu() {
+  const inputsRadio = document.querySelectorAll('.input-radio');
+  inputsRadio.forEach((inputRadio) => {
+    const menuEdit = inputRadio
+      .closest('.task-box-settings')
+      .querySelector('.task-box-menu');
+    inputRadio.checked && !menuEdit.classList.contains('task-box-menu-click')
+      ? menuEdit.classList.add('task-box-menu-click')
+      : menuEdit.classList.remove('task-box-menu-click');
+  });
+}
 
 function createTask(id) {
   const userTask = taskInput.value.trim();
+  if (!userTask) {
+    deleteAfterEditTask(id);
+    return;
+  }
   if (!todos) {
     todos = [];
   }
@@ -58,6 +88,7 @@ function createTask(id) {
 }
 
 function updateStatusTask(target) {
+  console.log(target);
   const text = target.nextElementSibling;
   target.checked ? text.classList.add('true') : text.classList.remove('true');
   todos[target.id].status = target.checked;
@@ -72,6 +103,14 @@ function deleteTask(target) {
   todos.splice(targetID, 1);
   localStorage.setItem('todo-list', JSON.stringify(todos));
   renderTodo(todos);
+  taskInput.value = '';
+}
+
+function deleteAfterEditTask(id) {
+  todos.splice(id, 1);
+  localStorage.setItem('todo-list', JSON.stringify(todos));
+  renderTodo(todos);
+  taskInput.value = '';
 }
 
 function renderTodo() {
@@ -110,6 +149,10 @@ function clearAll() {
   arrIDForClear.reverse().map((id) => todos.splice(id, 1));
   localStorage.setItem('todo-list', JSON.stringify(todos));
   renderTodo(todos);
+  taskInput.value = '';
+  if (arrIDForClear.length !== 0) {
+    clearAll();
+  }
 }
 
 function toggleListTasks() {
@@ -138,4 +181,29 @@ function toggleListTasks() {
       break;
   }
   taskInput.focus();
+  taskInput.value = '';
+  hideArrow();
+}
+
+function hideArrow() {
+  const arrows = document.querySelectorAll('.task-box-menu__icon-arrow');
+  console.log(arrows);
+  const arrowsNotHide = [];
+  arrows.forEach((arrow) => {
+    if (!arrow.closest('.task-box-item').classList.contains('hide')) {
+      arrowsNotHide.push(arrow);
+    }
+  });
+  console.log(arrowsNotHide);
+
+  for (let i = 0; i < arrowsNotHide.length; i++) {
+    if (i === 0) {
+      console.log(arrowsNotHide[i]);
+      arrowsNotHide[i].classList.add('hide');
+      arrowsNotHide[i].previousElementSibling.classList.add('icon-goup-item-not-margin');
+    } else {
+      arrowsNotHide[i].classList.remove('hide');
+      arrowsNotHide[i].previousElementSibling.classList.remove('icon-goup-item-not-margin');
+    }
+  }
 }
