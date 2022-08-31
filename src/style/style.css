@@ -165,7 +165,7 @@ body {
 }
 
 .icon-goup-item-not-margin:not(:last-child) {
-  margin-right: 36px;
+  margin-right: 0;
 }
 
 .task-box-settings__icon,

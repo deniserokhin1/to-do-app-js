@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // import '../src/style/normolize.css';
 // import '../src/style/style.css';
 
@@ -11,12 +12,14 @@ let todos = JSON.parse(localStorage.getItem('todo-list'));
 let idTargetTask = undefined;
 let idRadioButton = 'tasks';
 
-window.addEventListener('load', renderTodo(todos));
-taskInput.focus();
+window.addEventListener('load', () => {
+  renderTodo(todos);
+  taskInput.focus();
+});
 
 taskInput.addEventListener('keyup', (event) => {
   if (event.key === 'Enter' && (taskInput.value || idTargetTask)) {
-    createTask(idTargetTask);
+    createTask(taskInput.value, idTargetTask);
   }
 });
 
@@ -30,13 +33,7 @@ buttonClear.addEventListener('click', () => {
 
 document.addEventListener('mouseup', (event) => {
   const target = event.target;
-  if (target.classList.contains('task-box-settings__icon')) {
-    return;
-  }
-  const menuEdit = document.querySelectorAll('.task-box-menu');
-  menuEdit.forEach((menu) => {
-    menu.classList.remove('task-box-menu-click');
-  });
+  clickOnDocument(target);
 });
 
 listToDo.addEventListener('click', (event) => {
@@ -48,28 +45,32 @@ listToDo.addEventListener('click', (event) => {
     deleteTask(target);
   }
   if (target.classList.contains('edit')) {
-    editTask(target);
+    pasteTextTaskInInput(target);
   }
   if (target.classList.contains('input-radio')) {
     hideAndShowMenu(event.target);
+  }
+  if (target.classList.contains('task-box-menu__icon-arrow')) {
+    moveArrow(target);
   }
 });
 
 function hideAndShowMenu() {
   const inputsRadio = document.querySelectorAll('.input-radio');
   inputsRadio.forEach((inputRadio) => {
-    const menuEdit = inputRadio
+    let menuEdit = inputRadio
       .closest('.task-box-settings')
       .querySelector('.task-box-menu');
     inputRadio.checked && !menuEdit.classList.contains('task-box-menu-click')
       ? menuEdit.classList.add('task-box-menu-click')
       : menuEdit.classList.remove('task-box-menu-click');
+    menuEdit = null;
   });
 }
 
-function createTask(id) {
-  const userTask = taskInput.value.trim();
-  if (!userTask) {
+function createTask(valueInput, id) {
+  valueInput.trim();
+  if (!valueInput) {
     deleteAfterEditTask(id);
     return;
   }
@@ -77,7 +78,7 @@ function createTask(id) {
     todos = [];
   }
   let taskInfo = {
-    name: userTask,
+    name: valueInput,
     status: false,
   };
   id ? (todos[id] = taskInfo) : todos.push(taskInfo);
@@ -117,12 +118,11 @@ function renderTodo() {
     return;
   }
   listToDo.innerHTML = '';
-  // eslint-disable-next-line no-undef
   listToDo.appendChild(templateEngine(todos.map(todoItemTamplate)));
   toggleListTasks();
 }
 
-function editTask(target) {
+function pasteTextTaskInInput(target) {
   idTargetTask = target.closest('.task-box-item').querySelector('.input').id;
   const textTask = target.closest('.task-box-item').querySelector('.text');
   taskInput.value = textTask.textContent;
@@ -149,9 +149,28 @@ function clearAll() {
   localStorage.setItem('todo-list', JSON.stringify(todos));
   renderTodo(todos);
   taskInput.value = '';
-  if (arrIDForClear.length !== 0) {
-    clearAll();
+}
+
+function clickOnDocument(target) {
+  if (
+    target.classList.contains('task-box-settings__icon') ||
+    target.classList.contains('block-input__input') ||
+    target.classList.contains('task-box-menu__icon-arrow') ||
+    target.classList.contains('updatestatus') ||
+    target.classList.contains('delete')
+  ) {
+    return;
   }
+  const menuEdit = document.querySelectorAll('.task-box-menu');
+  menuEdit.forEach((menu) => {
+    menu.classList.remove('task-box-menu-click');
+  });
+
+  if (idTargetTask && taskInput.value) {
+    idTargetTask = undefined;
+    taskInput.value = '';
+  }
+  taskInput.focus();
 }
 
 function toggleListTasks() {
@@ -179,31 +198,92 @@ function toggleListTasks() {
     default:
       break;
   }
-  taskInput.focus();
+  // taskInput.focus();
   taskInput.value = '';
-  hideArrow();
+  hideAndShowArrows();
 }
 
-function hideArrow() {
-  const arrows = document.querySelectorAll('.task-box-menu__icon-arrow');
+function moveArrow(target) {
+  const taskItems = document.querySelectorAll('.task-box-item');
+  const taskItemsNotHide = [];
+
+  taskItems.forEach((item) => {
+    if (!item.classList.contains('hide')) {
+      taskItemsNotHide.push(item);
+    }
+  });
+
+  if (!(target.closest('.task-box-item') === taskItemsNotHide[0])) {
+    return;
+  }
+
+  const parentTaskItem = target.closest('.task-box__list');
+  const firstItemTask = taskItemsNotHide[0];
+  const thirdItemTask = firstItemTask.nextElementSibling.nextElementSibling;
+  parentTaskItem.insertBefore(firstItemTask, thirdItemTask);
+
+  idTaskDown = target.id;
+  idTaskUp = taskItemsNotHide[1].querySelector('.task-box-menu__icon-arrow').id;
+
+  firstelElementNotHideArray = todos[idTaskDown];
+  todos[idTaskDown] = todos[idTaskUp];
+  todos[idTaskUp] = firstelElementNotHideArray;
+
+  localStorage.setItem('todo-list', JSON.stringify(todos));
+  hideAndShowArrows();
+  renderTodo(todos);
+}
+
+function hideAndShowArrows() {
+  const arrayVisibleArrows = findVisibleArrows();
+  toggleFirstArrow(arrayVisibleArrows);
+
+  if (arrayVisibleArrows.length === 1) {
+    hideSingleArrow(arrayVisibleArrows);
+    return;
+  } else {
+    showAllArrow(arrayVisibleArrows);
+  }
+}
+
+function findVisibleArrows() {
+  const allArrows = document.querySelectorAll('.task-box-menu__icon-arrow');
   const arrowsNotHide = [];
-  arrows.forEach((arrow) => {
+
+  allArrows.forEach((arrow) => {
     if (!arrow.closest('.task-box-item').classList.contains('hide')) {
       arrowsNotHide.push(arrow);
     }
   });
+  return arrowsNotHide;
+}
 
-  for (let i = 0; i < arrowsNotHide.length; i++) {
+function toggleFirstArrow(arrayVisibleArrows) {
+  for (let i = 0; i < arrayVisibleArrows.length; i++) {
     if (i === 0) {
-      arrowsNotHide[i].classList.add('hide');
-      arrowsNotHide[i].previousElementSibling.classList.add(
-        'icon-goup-item-not-margin'
-      );
+      arrayVisibleArrows[i].classList.remove('fa-arrow-up');
+      arrayVisibleArrows[i].classList.add('fa-arrow-down');
     } else {
-      arrowsNotHide[i].classList.remove('hide');
-      arrowsNotHide[i].previousElementSibling.classList.remove(
-        'icon-goup-item-not-margin'
-      );
+      arrayVisibleArrows[i].classList.add('fa-arrow-up');
+      arrayVisibleArrows[i].classList.remove('fa-arrow-down');
     }
   }
+  return;
+}
+
+function hideSingleArrow(arrayVisibleArrows) {
+  arrayVisibleArrows[0].classList.add('hide');
+  arrayVisibleArrows[0].previousElementSibling.classList.add(
+    'icon-goup-item-not-margin'
+  );
+  return;
+}
+
+function showAllArrow(arrayVisibleArrows) {
+  arrayVisibleArrows.forEach((element) => {
+    element.classList.remove('hide');
+    element.previousElementSibling.classList.remove(
+      'icon-goup-item-not-margin'
+    );
+  });
 }

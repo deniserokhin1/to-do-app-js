@@ -5,14 +5,14 @@ const todoItemTamplate = (todo, id) => ({
   content: [
     {
       tag: 'label',
-      cls: ['task-box-item__label', 'label'],
+      cls: ['task-box-item__label', 'label', 'updatestatus'],
       attrs: {
         for: id,
       },
       content: [
         {
           tag: 'input',
-          cls: ['task-box-item__input', 'input'],
+          cls: ['task-box-item__input', 'input', 'updatestatus'],
           attrs: {
             type: 'checkbox',
             id: id,
@@ -21,7 +21,12 @@ const todoItemTamplate = (todo, id) => ({
         },
         {
           tag: 'p',
-          cls: ['task-box-item__text', 'text', `${todo.status}`],
+          cls: [
+            'task-box-item__text',
+            'text',
+            `${todo.status}`,
+            'updatestatus',
+          ],
           content: todo.name,
         },
       ],
@@ -95,14 +100,10 @@ const todoItemTamplate = (todo, id) => ({
         },
         {
           tag: 'i',
-          cls: [
-            'fa',
-            'fa-arrow-up',
-            'task-box-menu__icon-arrow',
-            'icon-goup-item',
-          ],
+          cls: ['fa', 'fa-arrow-up', 'task-box-menu__icon-arrow'],
           attrs: {
             'aria-hidden': true,
+            id: id,
           },
         },
       ],
