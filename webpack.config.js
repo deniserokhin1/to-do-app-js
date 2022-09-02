@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    filename: isProduction ? '[name].[contenthash].js' : '[name].js',
     clean: true,
   },
   resolve: {
@@ -49,7 +49,7 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: isProduction ? '[name].[contenthash].css' : '[name].css',
     }),
     new CopyPlugin({
       patterns: [

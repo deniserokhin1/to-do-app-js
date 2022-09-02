@@ -229,11 +229,3 @@ body {
 .input-radio {
   display: none;
 }
-
-.telega {
-  background-image: url('../assets/background.png');
-  background-size: cover;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-}
