@@ -2,10 +2,11 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "dev": "webpack",
     "build": "NODE_ENV=production webpack",
+    "start": "webpack-dev-server --open",
     "prepare": "husky install",
     "format": "prettier --write ./src/",
     "lint:js": "eslint ./src/**/*.js",
@@ -34,7 +35,9 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
+    "node-sass": "^7.0.1",
     "prettier": "^2.7.1",
+    "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
     "stylelint": "^14.11.0",
     "stylelint-config-prettier": "^9.0.3",
@@ -44,5 +47,8 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.10.0"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }

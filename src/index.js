@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-// import '../src/style/normolize.css';
-// import '../src/style/style.css';
+import { templateEngine } from '@lib/templating-engine';
+import { todoItemTamplate } from '@lib/todo-item-tamplate';
+import '@/style/style';
 
 const taskInput = document.querySelector('.block-input__input');
 const listToDo = document.querySelector('.task-box__list');
@@ -102,15 +103,16 @@ function deleteTask(target) {
   const targetID = target.closest('.task-box-item').querySelector('.input').id;
   todos.splice(targetID, 1);
   localStorage.setItem('todo-list', JSON.stringify(todos));
-  renderTodo(todos);
   taskInput.value = '';
+  renderTodo(todos);
 }
 
 function deleteAfterEditTask(id) {
   todos.splice(id, 1);
   localStorage.setItem('todo-list', JSON.stringify(todos));
-  renderTodo(todos);
+  idTargetTask = undefined;
   taskInput.value = '';
+  renderTodo(todos);
 }
 
 function renderTodo() {
@@ -119,6 +121,7 @@ function renderTodo() {
   }
   listToDo.innerHTML = '';
   listToDo.appendChild(templateEngine(todos.map(todoItemTamplate)));
+  taskInput.focus();
   toggleListTasks();
 }
 
@@ -161,6 +164,7 @@ function clickOnDocument(target) {
   ) {
     return;
   }
+
   const menuEdit = document.querySelectorAll('.task-box-menu');
   menuEdit.forEach((menu) => {
     menu.classList.remove('task-box-menu-click');
@@ -222,10 +226,12 @@ function moveArrow(target) {
   const thirdItemTask = firstItemTask.nextElementSibling.nextElementSibling;
   parentTaskItem.insertBefore(firstItemTask, thirdItemTask);
 
-  idTaskDown = target.id;
-  idTaskUp = taskItemsNotHide[1].querySelector('.task-box-menu__icon-arrow').id;
+  const idTaskDown = target.id;
+  const idTaskUp = taskItemsNotHide[1].querySelector(
+    '.task-box-menu__icon-arrow'
+  ).id;
 
-  firstelElementNotHideArray = todos[idTaskDown];
+  const firstelElementNotHideArray = todos[idTaskDown];
   todos[idTaskDown] = todos[idTaskUp];
   todos[idTaskUp] = firstelElementNotHideArray;
 
@@ -259,10 +265,12 @@ function findVisibleArrows() {
 }
 
 function toggleFirstArrow(arrayVisibleArrows) {
+  const firstVisibleArrow = arrayVisibleArrows[0];
+
   for (let i = 0; i < arrayVisibleArrows.length; i++) {
     if (i === 0) {
-      arrayVisibleArrows[i].classList.remove('fa-arrow-up');
-      arrayVisibleArrows[i].classList.add('fa-arrow-down');
+      firstVisibleArrow.classList.remove('fa-arrow-up');
+      firstVisibleArrow.classList.add('fa-arrow-down');
     } else {
       arrayVisibleArrows[i].classList.add('fa-arrow-up');
       arrayVisibleArrows[i].classList.remove('fa-arrow-down');

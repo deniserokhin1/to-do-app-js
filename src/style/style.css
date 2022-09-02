@@ -2,7 +2,20 @@
 /* stylelint-disable font-family-name-quotes */
 /* stylelint-disable alpha-value-notation */
 /* stylelint-disable color-function-notation */
-@import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap';
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('@/assets/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* stylelint-disable-next-line no-invalid-position-at-import-rule */
+@import '~normalize.css';
+/* stylelint-disable-next-line no-invalid-position-at-import-rule */
+@import '@/style/font-awesome/css/font-awesome.min.css';
+
+/* stylelint-disable-next-line no-invalid-position-at-import-rule */
 
 * {
   margin: 0;
@@ -20,7 +33,7 @@ ul {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'MyFont', sans-serif;
   background-color: var(--bg-body-color);
   width: 100%;
   height: 100vh;
@@ -32,7 +45,7 @@ body {
 
 .container {
   margin: 25px auto 0;
-  max-width: 400px;
+  max-width: 425px;
   background-color: var(--bg-wrapper-color);
   border-radius: 7px;
   padding: 28px 0 1px;
@@ -59,10 +72,12 @@ body {
   border: 1px solid #999;
   border-radius: 5px;
   outline: none;
+  font-family: 'MyFont', sans-serif;
 }
 
 .block-input__input::placeholder {
   color: #bfbfbf;
+  font-family: 'MyFont', sans-serif;
 }
 
 .controls {
@@ -78,7 +93,7 @@ body {
 }
 
 .controls-item:not(:last-child) {
-  margin-right: 17px;
+  margin-right: 18px;
 }
 
 .controls-item__text {
@@ -184,8 +199,6 @@ body {
 
 .edit__icon,
 .delete__icon {
-  font-family: 'Poppins', sans-serif;
-  font-style: normal;
   font-weight: 500;
   padding-left: 8px;
   color: black;
@@ -215,4 +228,12 @@ body {
 
 .input-radio {
   display: none;
+}
+
+.telega {
+  background-image: url('../assets/background.png');
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
 }
