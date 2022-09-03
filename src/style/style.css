@@ -117,6 +117,10 @@ body {
   transition: transform 0.03s ease-in-out;
 }
 
+.controls__clear-btn:hover {
+  background: #287afe;
+}
+
 .controls__clear-btn_click:active {
   transform: scale(0.95);
   transform-origin: center;

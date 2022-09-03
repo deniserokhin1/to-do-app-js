@@ -3,6 +3,9 @@ import { templateEngine } from '@lib/templating-engine';
 import { todoItemTamplate } from '@lib/todo-item-tamplate';
 import '@/style/style';
 
+import Swal from '../node_modules/sweetalert2/dist/sweetalert2.js';
+import '../node_modules/sweetalert2/dist/sweetalert2.css';
+
 const taskInput = document.querySelector('.block-input__input');
 const listToDo = document.querySelector('.task-box__list');
 const controlsList = document.querySelector('.controls__list');
@@ -20,7 +23,24 @@ window.addEventListener('load', () => {
 
 taskInput.addEventListener('keyup', (event) => {
   if (event.key === 'Enter' && (taskInput.value || idTargetTask)) {
-    createTask(taskInput.value, idTargetTask);
+    const arrTextTask = taskInput.value
+      .split(' ')
+      .filter((item) => item.length > 20);
+    if (arrTextTask.length === 0) {
+      createTask(taskInput.value, idTargetTask);
+      return;
+    }
+
+    Swal.fire({
+      title: 'Упс!',
+      text: 'Вы ввели тарабарщину.',
+      icon: 'error',
+      confirmButtonText: 'Ok',
+    });
+
+    taskInput.value = '';
+    taskInput.focus();
+    return;
   }
 });
 
@@ -202,7 +222,6 @@ function toggleListTasks() {
     default:
       break;
   }
-  // taskInput.focus();
   taskInput.value = '';
   hideAndShowArrows();
 }
@@ -217,27 +236,36 @@ function moveArrow(target) {
     }
   });
 
-  if (!(target.closest('.task-box-item') === taskItemsNotHide[0])) {
+  if (Number(target.id) === 0) {
+    const parentTaskItem = target.closest('.task-box__list');
+    const firstItemTask = taskItemsNotHide[0];
+    const thirdItemTask = firstItemTask.nextElementSibling.nextElementSibling;
+    parentTaskItem.insertBefore(firstItemTask, thirdItemTask);
+
+    const idTaskDown = target.id;
+    const idTaskUp = taskItemsNotHide[1].querySelector(
+      '.task-box-menu__icon-arrow'
+    ).id;
+
+    const firstelElementNotHideArray = todos[idTaskDown];
+    todos[idTaskDown] = todos[idTaskUp];
+    todos[idTaskUp] = firstelElementNotHideArray;
+
+    localStorage.setItem('todo-list', JSON.stringify(todos));
+    hideAndShowArrows();
+    renderTodo(todos);
     return;
   }
 
-  const parentTaskItem = target.closest('.task-box__list');
-  const firstItemTask = taskItemsNotHide[0];
-  const thirdItemTask = firstItemTask.nextElementSibling.nextElementSibling;
-  parentTaskItem.insertBefore(firstItemTask, thirdItemTask);
-
-  const idTaskDown = target.id;
-  const idTaskUp = taskItemsNotHide[1].querySelector(
-    '.task-box-menu__icon-arrow'
-  ).id;
-
-  const firstelElementNotHideArray = todos[idTaskDown];
-  todos[idTaskDown] = todos[idTaskUp];
-  todos[idTaskUp] = firstelElementNotHideArray;
-
-  localStorage.setItem('todo-list', JSON.stringify(todos));
-  hideAndShowArrows();
-  renderTodo(todos);
+  if (Number(target.id) > 0) {
+    const idTaskUp = target.id;
+    const taskMoveUp = todos[idTaskUp];
+    todos.splice(idTaskUp, 1);
+    todos.unshift(taskMoveUp);
+    localStorage.setItem('todo-list', JSON.stringify(todos));
+    hideAndShowArrows();
+    renderTodo(todos);
+  }
 }
 
 function hideAndShowArrows() {
