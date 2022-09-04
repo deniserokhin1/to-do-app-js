@@ -1,0 +1,25 @@
+/* stylelint-disable selector-class-pattern */
+@media (max-width: 450px) {
+  .controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .controls__list {
+    margin-bottom: 30px;
+  }
+
+  .controls__clear-btn {
+    padding: 7px 90px;
+  }
+}
+
+@media (max-width: 380px) {
+  .block-input__input::placeholder {
+    font-size: 13px;
+  }
+}

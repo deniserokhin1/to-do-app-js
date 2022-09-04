@@ -2,6 +2,7 @@
 import { templateEngine } from '@lib/templating-engine';
 import { todoItemTamplate } from '@lib/todo-item-tamplate';
 import '@/style/style';
+import '@/style/media';
 
 import Swal from '../node_modules/sweetalert2/dist/sweetalert2.js';
 import '../node_modules/sweetalert2/dist/sweetalert2.css';

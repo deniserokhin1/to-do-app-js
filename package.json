@@ -11,7 +11,8 @@
     "format": "prettier --write ./src/",
     "lint:js": "eslint ./src/**/*.js",
     "lint:css": "stylelint ./src/**/*.css",
-    "lint": "npm run lint:js && npm run lint:css && npm run format"
+    "lint": "npm run lint:js && npm run lint:css && npm run format",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
